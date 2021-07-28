@@ -1,15 +1,21 @@
 
 import styles from '../styles/Home.module.css'
-import { YMaps,Map, GeolocationControl, SearchControl,ObjectManager,Placemark } from 'react-yandex-maps';
+import { YMaps,Map, GeolocationControl, SearchControl,ObjectManager,RouteButton,RulerControl,TypeSelector, ZoomControl,FullscreenControl } from 'react-yandex-maps';
 import Data from '../location.json'
 export default function Home() {
   return (
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',width:'100vw'}}> 
     <YMaps   query={{
       apikey: '8140bb7c-9efa-44ca-8ec9-70eb503948d1',
-    }} style={styles.container}>
-    <Map width='100vw' height='100vh' defaultState={{ center: [41.298916, 69.360232], zoom: 12 }} >
+    }} >
+    <Map width='500px' height='500px' defaultState={{ center: [41.298916, 69.360232], zoom: 12 }} >
       <GeolocationControl options={{float:'right',maxWidth:'40px'}}/>
-      <SearchControl options={{maxWidth:2000}}/>
+      <SearchControl />
+      <RouteButton/>
+      <RulerControl/>
+      <TypeSelector/>
+      <ZoomControl/>
+      <FullscreenControl/>
       <ObjectManager
             objects={{
               openBalloonOnClick: true
@@ -36,6 +42,7 @@ export default function Home() {
                   properties: {
                     balloonContent: `
                     <p>${point.C}</p>
+                    <p>${point.A},${point.B}</p>
                 `,
                     clusterCaption: `Метка №${id + 1}`
                   }
@@ -47,5 +54,6 @@ export default function Home() {
 
     </Map>
     </YMaps>
+    </div>
   )
 }
